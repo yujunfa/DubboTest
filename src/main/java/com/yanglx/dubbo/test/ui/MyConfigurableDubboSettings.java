@@ -10,6 +10,8 @@ public class MyConfigurableDubboSettings {
 
     private String name;
 
+    private String timeout;
+
     private String address;
 
     private String ip;
@@ -21,6 +23,14 @@ public class MyConfigurableDubboSettings {
     private String version;
 
     private String group;
+
+    public String getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(String timeout) {
+        this.timeout = timeout;
+    }
 
     public UUID getId() {
         return id;

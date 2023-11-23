@@ -18,6 +18,7 @@ public class SettingDialog {
     private JBTextField versionField;
     private JBTextField groupField;
 
+    private JBTextField timeoutField;
     private JPanel panel;
 
     public SettingDialog(MyConfigurableDubboSettings browser) {
@@ -36,6 +37,7 @@ public class SettingDialog {
         this.portField = new JBTextField(browser.getPort());
         this.versionField = new JBTextField(browser.getVersion());
         this.groupField = new JBTextField(browser.getGroup());
+        this.timeoutField = new JBTextField(browser.getTimeout());
 
         this.panel = FormBuilder.createFormBuilder()
                 .addLabeledComponent("Name", nameField)
@@ -44,6 +46,7 @@ public class SettingDialog {
                 .addLabeledComponent("Port", portField)
                 .addLabeledComponent("Version", versionField)
                 .addLabeledComponent("Group", groupField)
+                .addLabeledComponent("Timeout", timeoutField)
                 .getPanel();
     }
 
@@ -57,6 +60,7 @@ public class SettingDialog {
         String version = this.versionField.getText();
         String group = this.groupField.getText();
         String ip = this.ipField.getText();
+        String timeout = this.timeoutField.getText();
         String nameField = this.nameField.getText();
         //校验重复
         MyConfigurableDubboSettings configurableDubboSettings = new MyConfigurableDubboSettings();
@@ -66,6 +70,7 @@ public class SettingDialog {
         configurableDubboSettings.setPort(port);
         configurableDubboSettings.setVersion(version);
         configurableDubboSettings.setGroup(group);
+        configurableDubboSettings.setTimeout(timeout);
         return configurableDubboSettings;
     }
 

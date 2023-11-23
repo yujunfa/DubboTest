@@ -85,6 +85,7 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
             browser.setVersion(myConfigurableDubboSettings.getVersion());
             browser.setGroup(myConfigurableDubboSettings.getGroup());
             browser.setName(myConfigurableDubboSettings.getName());
+            browser.setTimeout(myConfigurableDubboSettings.getTimeout());
             if (StrUtils.isNotBlank(browser.getProcessedAddress())) {
                 return browser;
             }

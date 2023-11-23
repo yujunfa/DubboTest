@@ -84,6 +84,22 @@ public class AppSettingsComponent {
                 public boolean isCellEditable(MyConfigurableDubboSettings myConfigurableDubboSettings) {
                     return false;
                 }
+            },
+            new EditableColumnInfo<MyConfigurableDubboSettings, String>("Timeout") {
+                @Override
+                public String valueOf(MyConfigurableDubboSettings item) {
+                    return item.getTimeout();
+                }
+
+                @Override
+                public void setValue(MyConfigurableDubboSettings item, String value) {
+                    item.setTimeout(value);
+                }
+
+                @Override
+                public boolean isCellEditable(MyConfigurableDubboSettings myConfigurableDubboSettings) {
+                    return false;
+                }
             }};
 
     public AppSettingsComponent() {

@@ -35,6 +35,10 @@ dependencies {
     implementation fileTree(dir: 'lib', includes: ['*.jar'])
 }
 
+tasks.withType(JavaCompiler) {
+    options.encoding = 'UTF-8'
+}
+
 tasks {
     runIde {
         jvmArgs '--add-exports', 'java.base/jdk.internal.vm=ALL-UNNAMED'

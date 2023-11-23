@@ -24,7 +24,7 @@ public class CloseTabAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         if (tabBar.getTabs().size() > 1) {
-            // 至少保留一个 TAB
+            // 至少TAB
             tabBar.closeTab(tabId);
         }
     }
@@ -35,6 +35,6 @@ public class CloseTabAction extends AnAction {
 
         //鼠标悬停图标
         Presentation presentation1 = e.getPresentation();
-        presentation1.setHoveredIcon(AllIcons.Actions.CloseHovered);
+        presentation1.setHoveredIcon(AllIcons.Actions. CloseHovered);
     }
 }

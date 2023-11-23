@@ -112,7 +112,7 @@ public class DubboApiLocator {
         reference.setCheck(false);
         reference.setGeneric("true");
         reference.setRetries(0);
-        reference.setTimeout(10 * 1000);
+        reference.setTimeout(30 * 1000);
         if (dubboMethodEntity.getAddress().startsWith(AddressTypeEnum.dubbo.name())) {
             reference.setUrl(dubboMethodEntity.getAddress());
         } else {
@@ -140,6 +140,7 @@ public class DubboApiLocator {
         RegistryConfig registryConfig = new RegistryConfig();
         Map<String, String> param = new HashMap<>();
         param.put("dubbo.application.service-discovery.migration", "APPLICATION_FIRST");
+        param.put("timeout", String.valueOf(30 * 1000));
         registryConfig.setParameters(param);
         registryConfig.setAddress(address);
         return registryConfig;
