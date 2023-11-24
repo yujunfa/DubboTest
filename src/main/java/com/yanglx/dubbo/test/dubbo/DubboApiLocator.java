@@ -56,8 +56,10 @@ public class DubboApiLocator {
         String group = StringUtils.defaultString(referenceConfig.getGroup());
         String version = StringUtils.defaultString(referenceConfig.getVersion());
         String url = StringUtils.defaultString(referenceConfig.getUrl());
+        referenceConfig.getRegistries().get(0).setTimeout(referenceConfig.getTimeout());
         String registries = StringUtils.defaultString(
                 JsonUtils.toJSONString(referenceConfig.getRegistries()));
+
 
         List<String> uniqueParams = Lists.newArrayList(interfaceName, group, version, url, registries);
         return String.join("_", uniqueParams);
@@ -113,6 +115,13 @@ public class DubboApiLocator {
         reference.setGeneric("true");
         reference.setRetries(0);
         reference.setTimeout(30 * 1000);
+        if (dubboMethodEntity.getTimeout() != null) {
+            try {
+                reference.setTimeout(Integer.parseInt(dubboMethodEntity.getTimeout()));
+            } catch (Exception e) {
+
+            }
+        }
         if (dubboMethodEntity.getAddress().startsWith(AddressTypeEnum.dubbo.name())) {
             reference.setUrl(dubboMethodEntity.getAddress());
         } else {
@@ -142,6 +151,12 @@ public class DubboApiLocator {
         param.put("dubbo.application.service-discovery.migration", "APPLICATION_FIRST");
         param.put("timeout", String.valueOf(30 * 1000));
         registryConfig.setParameters(param);
+        if (StrUtils.isNotBlank(dubboMethodEntity.getUsername())) {
+            registryConfig.setUsername(dubboMethodEntity.getUsername());
+        }
+        if (StrUtils.isNotBlank(dubboMethodEntity.getPassword())) {
+            registryConfig.setPassword(dubboMethodEntity.getPassword());
+        }
         registryConfig.setAddress(address);
         return registryConfig;
     }

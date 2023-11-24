@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="29" y="8" width="844" height="556"/>
+      <xy x="29" y="8" width="1080" height="556"/>
     </constraints>
     <properties/>
     <border type="etched">
@@ -79,7 +79,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <grid id="cda75" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                      <grid id="cda75" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                         <margin top="0" left="0" bottom="0" right="0"/>
                         <constraints border-constraint="Center"/>
                         <properties/>
@@ -121,6 +121,25 @@
                               </grid>
                             </constraints>
                             <properties/>
+                          </component>
+                          <component id="c6943" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <labelFor value="626de"/>
+                              <text value="Timeout"/>
+                            </properties>
+                          </component>
+                          <component id="c88ca" class="javax.swing.JTextField" binding="timeoutTextField">
+                            <constraints>
+                              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="150" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <text value=""/>
+                            </properties>
                           </component>
                         </children>
                       </grid>

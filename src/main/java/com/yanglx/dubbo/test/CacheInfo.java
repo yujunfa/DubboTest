@@ -51,6 +51,36 @@ public class CacheInfo implements Serializable {
 
     private Date date;
 
+    private String timeout;
+
+    private String username;
+
+    private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(String timeout) {
+        this.timeout = timeout;
+    }
+
     public String getInterfaceName() {
         return interfaceName;
     }
@@ -142,6 +172,9 @@ public class CacheInfo implements Serializable {
         cacheInfo.setMethodTypeJson(JsonUtils.toJSONString(dubboMethodEntity.getMethodType()));
         cacheInfo.setParamObjJson(JsonUtils.toJSONString(dubboMethodEntity.getParam()));
         cacheInfo.setAddress(dubboMethodEntity.getAddress());
+        cacheInfo.setTimeout(dubboMethodEntity.getTimeout());
+        cacheInfo.setUsername(dubboMethodEntity.getUsername());
+        cacheInfo.setPassword(dubboMethodEntity.getPassword());
         cacheInfo.setDate(new Date());
         return cacheInfo;
     }
@@ -158,6 +191,9 @@ public class CacheInfo implements Serializable {
         dubboMethodEntity.setMethodName(this.getMethodName());
         dubboMethodEntity.setVersion(this.getVersion());
         dubboMethodEntity.setGroup(this.getGroup());
+        dubboMethodEntity.setTimeout(this.getTimeout());
+        dubboMethodEntity.setUsername(this.getUsername());
+        dubboMethodEntity.setPassword(this.getPassword());
 
         List<String> stringList = JsonUtils.toJavaList(this.getMethodTypeJson(), String.class);
         String[] methodTypes = new String[stringList.size()];

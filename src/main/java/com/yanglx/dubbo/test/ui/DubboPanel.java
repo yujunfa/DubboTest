@@ -13,6 +13,8 @@ import com.yanglx.dubbo.test.utils.StrUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +75,7 @@ public class DubboPanel extends JBPanel {
     private JTextField groupTextField;
     private JButton saveBtn;
     private JPanel editorPane;
+    private JTextField timeoutTextField;
     /**
      * Json editor req
      */
@@ -292,13 +295,22 @@ public class DubboPanel extends JBPanel {
                 Object invoke = dubboApiLocator.invoke(dubboMethodEntity);
                 return invoke;
             });
+            int timeout = 30 * 1000;
+            if (dubboMethodEntity.getTimeout() != null) {
+                try {
+                    timeout = Integer.parseInt(dubboMethodEntity.getTimeout());
+                } catch (Exception exception) {
+
+                }
+            }
             //异步获取返回值，设置超时时间
+            int finalTimeout = timeout;
             executorService.submit(() -> {
                 tip.setText("Requesting...");
                 tip.updateUI();
                 long start = System.currentTimeMillis();
                 try {
-                    Object invoke = submit.get(10, TimeUnit.SECONDS);
+                    Object invoke = submit.get(finalTimeout, TimeUnit.SECONDS);
 
                     PluginUtils.writeDocument(this.project,
                             this.jsonEditorResp.getDocument(),
@@ -328,6 +340,13 @@ public class DubboPanel extends JBPanel {
             CacheInfo item = (CacheInfo) e.getItem();
             versionTextField.setText(item.getVersion());
             groupTextField.setText(item.getGroup());
+            timeoutTextField.setText(item.getTimeout());
+        });
+        timeoutTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
         });
     }
 
@@ -349,6 +368,9 @@ public class DubboPanel extends JBPanel {
         this.dubboMethodEntity.setAddress(selectedItem.getAddress());
         this.dubboMethodEntity.setVersion(versionTextField.getText());
         this.dubboMethodEntity.setGroup(groupTextField.getText());
+        this.dubboMethodEntity.setTimeout(selectedItem.getTimeout());
+        this.dubboMethodEntity.setUsername(selectedItem.getUsername());
+        this.dubboMethodEntity.setPassword(selectedItem.getPassword());
         if (jsonEditorReq.getDocumentText() != null
                 && jsonEditorReq.getDocumentText().length() > 0) {
             DubboMethodEntity dubboMethodEntity = JsonUtils.toJava(jsonEditorReq.getDocumentText(), DubboMethodEntity.class);

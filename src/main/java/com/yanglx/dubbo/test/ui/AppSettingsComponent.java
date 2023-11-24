@@ -53,6 +53,38 @@ public class AppSettingsComponent {
                     return false;
                 }
             },
+            new EditableColumnInfo<MyConfigurableDubboSettings, String>("Username") {
+                @Override
+                public String valueOf(MyConfigurableDubboSettings item) {
+                    return item.getUsername();
+                }
+
+                @Override
+                public void setValue(MyConfigurableDubboSettings item, String value) {
+                    item.setUsername(value);
+                }
+
+                @Override
+                public boolean isCellEditable(MyConfigurableDubboSettings myConfigurableDubboSettings) {
+                    return false;
+                }
+            },
+            new EditableColumnInfo<MyConfigurableDubboSettings, String>("Password") {
+                @Override
+                public String valueOf(MyConfigurableDubboSettings item) {
+                    return item.getPassword();
+                }
+
+                @Override
+                public void setValue(MyConfigurableDubboSettings item, String value) {
+                    item.setPassword(value);
+                }
+
+                @Override
+                public boolean isCellEditable(MyConfigurableDubboSettings myConfigurableDubboSettings) {
+                    return false;
+                }
+            },
             new EditableColumnInfo<MyConfigurableDubboSettings, String>("Version") {
                 @Override
                 public String valueOf(MyConfigurableDubboSettings item) {

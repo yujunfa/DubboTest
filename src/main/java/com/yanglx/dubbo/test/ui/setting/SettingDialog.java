@@ -18,6 +18,9 @@ public class SettingDialog {
     private JBTextField versionField;
     private JBTextField groupField;
 
+    private JBTextField usernameField;
+    private JBTextField passwordField;
+
     private JBTextField timeoutField;
     private JPanel panel;
 
@@ -38,11 +41,15 @@ public class SettingDialog {
         this.versionField = new JBTextField(browser.getVersion());
         this.groupField = new JBTextField(browser.getGroup());
         this.timeoutField = new JBTextField(browser.getTimeout());
+        this.usernameField = new JBTextField(browser.getUsername());
+        this.passwordField = new JBTextField(browser.getPassword());
 
         this.panel = FormBuilder.createFormBuilder()
                 .addLabeledComponent("Name", nameField)
                 .addLabeledComponent("Type", comboBox)
                 .addLabeledComponent("IP", ipField)
+                .addLabeledComponent("Username", usernameField)
+                .addLabeledComponent("Password", passwordField)
                 .addLabeledComponent("Port", portField)
                 .addLabeledComponent("Version", versionField)
                 .addLabeledComponent("Group", groupField)
@@ -54,7 +61,7 @@ public class SettingDialog {
         return panel;
     }
 
-    public MyConfigurableDubboSettings getMyConfigurableDubboSettings() {
+    public MyConfigurableDubboSettings getMyConfigurableDubboSettings(MyConfigurableDubboSettings browser) {
         String selectedItem = (String) this.comboBox.getSelectedItem();
         String port = this.portField.getText();
         String version = this.versionField.getText();
@@ -62,6 +69,8 @@ public class SettingDialog {
         String ip = this.ipField.getText();
         String timeout = this.timeoutField.getText();
         String nameField = this.nameField.getText();
+        String username = this.usernameField.getText();
+        String password = this.passwordField.getText();
         //校验重复
         MyConfigurableDubboSettings configurableDubboSettings = new MyConfigurableDubboSettings();
         configurableDubboSettings.setName(nameField);
@@ -71,6 +80,9 @@ public class SettingDialog {
         configurableDubboSettings.setVersion(version);
         configurableDubboSettings.setGroup(group);
         configurableDubboSettings.setTimeout(timeout);
+        configurableDubboSettings.setUsername(username);
+        configurableDubboSettings.setPassword(password);
+        configurableDubboSettings.setId(browser.getId());
         return configurableDubboSettings;
     }
 

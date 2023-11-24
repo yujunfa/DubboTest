@@ -48,9 +48,13 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
     @Override
     public void edit(@NotNull MyConfigurableDubboSettings item, @NotNull Function<? super MyConfigurableDubboSettings, ? extends MyConfigurableDubboSettings> mutator, boolean isAdd) {
         //对应工具栏得添加或者编辑按钮事件
-        MyConfigurableDubboSettings settings = this.openDialog(item);
+        MyConfigurableDubboSettings settings = this.openDialog(item, isAdd);
         if (settings != null) {
-            mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup());
+            if (isAdd) {
+                mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup());
+            } else {
+                mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup(), item.getId());
+            }
         }
     }
 
@@ -66,13 +70,13 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
         return true;
     }
 
-    private MyConfigurableDubboSettings openDialog(MyConfigurableDubboSettings browser) {
+    private MyConfigurableDubboSettings openDialog(MyConfigurableDubboSettings browser, boolean isAdd) {
         SettingDialog settingDialog = new SettingDialog(browser);
         final DialogBuilder dialogBuilder = new DialogBuilder(appSettingsComponent.getPanel())
                 .title("Dubbo Setting").centerPanel(settingDialog.getPanel());
         if (dialogBuilder.show() == DialogWrapper.OK_EXIT_CODE) {
-            MyConfigurableDubboSettings myConfigurableDubboSettings = settingDialog.getMyConfigurableDubboSettings();
-            if (isExist(myConfigurableDubboSettings)) {
+            MyConfigurableDubboSettings myConfigurableDubboSettings = settingDialog.getMyConfigurableDubboSettings(browser);
+            if (isExist(myConfigurableDubboSettings, isAdd)) {
                 JLabel jLabel = new JLabel("Data duplication");
                 DialogBuilder msgDialog = new DialogBuilder(appSettingsComponent.getPanel())
                         .title("Dubbo Setting").centerPanel(jLabel);
@@ -86,6 +90,8 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
             browser.setGroup(myConfigurableDubboSettings.getGroup());
             browser.setName(myConfigurableDubboSettings.getName());
             browser.setTimeout(myConfigurableDubboSettings.getTimeout());
+            browser.setUsername(myConfigurableDubboSettings.getUsername());
+            browser.setPassword(myConfigurableDubboSettings.getPassword());
             if (StrUtils.isNotBlank(browser.getProcessedAddress())) {
                 return browser;
             }
@@ -99,12 +105,15 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
      * @param settings
      * @return
      */
-    private boolean isExist(MyConfigurableDubboSettings settings) {
+    private boolean isExist(MyConfigurableDubboSettings settings, boolean isAdd) {
         List<MyConfigurableDubboSettings> settings1 = appSettingsComponent.getSettings();
         for (MyConfigurableDubboSettings dubboSettings : settings1) {
-            String item = dubboSettings.getName() + dubboSettings.getProcessedAddress() + dubboSettings.getVersion() + dubboSettings.getGroup();
-            String item2 = settings.getName() + settings.getProcessedAddress() + settings.getVersion() + settings.getGroup();
-            if (item.equals(item2)) {
+            if (dubboSettings.getId().equals(settings.getId())) {
+                continue;
+            }
+            String item = dubboSettings.getName();
+            String item2 = settings.getName();
+            if (isAdd && item.equals(item2)) {
                 return true;
             }
         }

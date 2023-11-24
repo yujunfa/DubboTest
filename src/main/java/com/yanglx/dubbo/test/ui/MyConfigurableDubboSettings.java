@@ -6,9 +6,13 @@ import java.util.UUID;
 
 public class MyConfigurableDubboSettings {
 
-    private final UUID id;
+    private UUID id;
 
     private String name;
+
+    private String username;
+
+    private String password;
 
     private String timeout;
 
@@ -23,6 +27,26 @@ public class MyConfigurableDubboSettings {
     private String version;
 
     private String group;
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getTimeout() {
         return timeout;
@@ -101,6 +125,19 @@ public class MyConfigurableDubboSettings {
     }
 
     public void setConfig(String name, String address, String version, String group) {
+        String protocol = address.substring(0, address.indexOf("://"));
+        String ip = address.substring(address.indexOf("://") + 3, address.lastIndexOf(":"));
+        String port = address.substring(address.lastIndexOf(":") + 1);
+        this.ip = ip;
+        this.protocol = protocol;
+        this.port = port;
+        this.version = version;
+        this.group = group;
+        this.name = name;
+    }
+
+    public void setConfig(String name, String address, String version, String group, UUID uuid) {
+        this.id = uuid;
         String protocol = address.substring(0, address.indexOf("://"));
         String ip = address.substring(address.indexOf("://") + 3, address.lastIndexOf(":"));
         String port = address.substring(address.lastIndexOf(":") + 1);
