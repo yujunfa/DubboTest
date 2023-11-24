@@ -76,7 +76,7 @@ import javax.swing.JComponent;
         List<CacheInfo> dubboConfigs = settings.getDubboConfigs();
         List<MyConfigurableDubboSettings> collect = dubboConfigs.stream().map(cacheInfo -> {
             MyConfigurableDubboSettings config = new MyConfigurableDubboSettings();
-            config.setConfig(cacheInfo.getName(),cacheInfo.getAddress(), cacheInfo.getVersion(), cacheInfo.getGroup());
+            config.setConfig(cacheInfo.getName(),cacheInfo.getAddress(), cacheInfo.getVersion(), cacheInfo.getGroup(), cacheInfo.getUsername(), cacheInfo.getPassword(), cacheInfo.getTimeout());
             return config;
         }).collect(Collectors.toList());
         mySettingsComponent.reset(collect);

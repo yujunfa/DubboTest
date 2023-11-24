@@ -32,7 +32,7 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
     public MyConfigurableDubboSettings clone(@NotNull MyConfigurableDubboSettings item, boolean forInPlaceEditing) {
         //对应工具栏得复制
         MyConfigurableDubboSettings myConfigurableDubboSettings = new MyConfigurableDubboSettings(forInPlaceEditing ? item.getId() : UUID.randomUUID());
-        myConfigurableDubboSettings.setConfig(item.getName(), item.getProcessedAddress(), item.getVersion(), item.getGroup());
+        myConfigurableDubboSettings.setConfig(item.getName(), item.getProcessedAddress(), item.getVersion(), item.getGroup(), item.getUsername(), item.getPassword(), item.getTimeout());
         return myConfigurableDubboSettings;
     }
 
@@ -51,9 +51,9 @@ public class MyDialogItemEditor implements TableModelEditor.DialogItemEditor<MyC
         MyConfigurableDubboSettings settings = this.openDialog(item, isAdd);
         if (settings != null) {
             if (isAdd) {
-                mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup());
+                mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup(), item.getUsername(), item.getPassword(), item.getUsername());
             } else {
-                mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup(), item.getId());
+                mutator.fun(item).setConfig(settings.getName(), settings.getProcessedAddress(), settings.getVersion(), settings.getGroup(), item.getUsername(), item.getPassword(), item.getUsername(), item.getId());
             }
         }
     }

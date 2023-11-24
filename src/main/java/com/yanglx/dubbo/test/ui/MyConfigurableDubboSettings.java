@@ -124,7 +124,7 @@ public class MyConfigurableDubboSettings {
         this.id = id;
     }
 
-    public void setConfig(String name, String address, String version, String group) {
+    public void setConfig(String name, String address, String version, String group, String username, String password, String timeout) {
         String protocol = address.substring(0, address.indexOf("://"));
         String ip = address.substring(address.indexOf("://") + 3, address.lastIndexOf(":"));
         String port = address.substring(address.lastIndexOf(":") + 1);
@@ -134,9 +134,12 @@ public class MyConfigurableDubboSettings {
         this.version = version;
         this.group = group;
         this.name = name;
+        this.username = username;
+        this.password = password;
+        this.timeout = timeout;
     }
 
-    public void setConfig(String name, String address, String version, String group, UUID uuid) {
+    public void setConfig(String name, String address, String version,String username, String password, String timeout, String group, UUID uuid) {
         this.id = uuid;
         String protocol = address.substring(0, address.indexOf("://"));
         String ip = address.substring(address.indexOf("://") + 3, address.lastIndexOf(":"));
