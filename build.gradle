@@ -22,13 +22,13 @@ intellij {
 }
 
 dependencies {
-    implementation('org.apache.dubbo:dubbo:3.0.0') {
+    implementation('org.apache.dubbo:dubbo:3.2.3') {
         exclude group: 'org.springframework'
     }
     implementation('com.google.code.gson:gson:2.8.9')
     implementation('org.javassist:javassist:3.20.0-GA')
     implementation('org.apache.commons:commons-lang3:3.11')
-    implementation('org.apache.dubbo:dubbo-dependencies-zookeeper:3.0.0') {
+    implementation('org.apache.dubbo:dubbo-dependencies-zookeeper:3.2.3') {
         exclude group: 'org.slf4j'
         exclude group: 'org.apache.zookeeper'
     }

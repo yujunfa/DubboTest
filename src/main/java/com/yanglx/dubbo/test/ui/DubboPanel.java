@@ -186,6 +186,10 @@ public class DubboPanel extends JBPanel {
         return jsonEditorReq;
     }
 
+    public JTextField getTimeoutTextField() {
+        return timeoutTextField;
+    }
+
     public void setJsonEditorReq(JsonEditor jsonEditorReq) {
         this.jsonEditorReq = jsonEditorReq;
     }
@@ -362,13 +366,14 @@ public class DubboPanel extends JBPanel {
         JTextField groupTextField = this.getGroupTextField();
         JComboBox<CacheInfo> addressBox = this.getAddressBox();
         JsonEditor jsonEditorReq = this.getJsonEditorReq();
+        JTextField timeoutTextField = this.getTimeoutTextField();
         this.dubboMethodEntity.setMethodName(methodName.getText());
         this.dubboMethodEntity.setInterfaceName(interfaceName.getText());
         CacheInfo selectedItem = (CacheInfo) addressBox.getSelectedItem();
         this.dubboMethodEntity.setAddress(selectedItem.getAddress());
         this.dubboMethodEntity.setVersion(versionTextField.getText());
         this.dubboMethodEntity.setGroup(groupTextField.getText());
-        this.dubboMethodEntity.setTimeout(selectedItem.getTimeout());
+        this.dubboMethodEntity.setTimeout(timeoutTextField.getText());
         this.dubboMethodEntity.setUsername(selectedItem.getUsername());
         this.dubboMethodEntity.setPassword(selectedItem.getPassword());
         if (jsonEditorReq.getDocumentText() != null

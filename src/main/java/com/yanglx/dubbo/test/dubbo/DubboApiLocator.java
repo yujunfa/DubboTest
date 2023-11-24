@@ -10,8 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
-import org.apache.dubbo.config.utils.ReferenceConfigCache;
-import org.apache.dubbo.config.utils.ReferenceConfigCache.KeyGenerator;
+import org.apache.dubbo.config.utils.SimpleReferenceCache;
+import org.apache.dubbo.config.utils.SimpleReferenceCache.KeyGenerator;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +87,7 @@ public class DubboApiLocator {
         }
 //        Thread.currentThread().setContextClassLoader(DubboMethodEntity.class.getClassLoader());
         ReferenceConfig<GenericService> referenceConfig = this.getReferenceConfig(dubboMethodEntity);
-        ReferenceConfigCache cache = ReferenceConfigCache.getCache(CACHE_NAME, generator);
+        SimpleReferenceCache cache = SimpleReferenceCache.getCache(CACHE_NAME, generator);
         GenericService genericService = cache.get(referenceConfig);
         try {
             return genericService.$invoke(dubboMethodEntity.getMethodName(),
